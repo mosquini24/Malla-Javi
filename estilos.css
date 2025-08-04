@@ -1,1 +1,177 @@
+:root {
+    --color-fondo: #fdeff2;
+    --color-semestre: #ffffff;
+    --color-titulo-principal: #d94a87;
+    --color-titulo-principal-hover: #c72c71;
+    --color-titulo-semestre: #e86fa3;
+    --color-texto-aprobado: #ffffff;
+    --color-borde: #f3d6e6;
+    --color-sombra: rgba(223, 179, 200, 0.2);
+    --color-banner-felicitaciones: #98DFAF;
+    --color-texto-banner: #fff;
+    --fuente-principal: 'Poppins', sans-serif;
+}
 
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: var(--color-titulo-principal);
+    font-weight: 600;
+    font-size: 2em;
+}
+
+.felicitaciones-banner {
+    background-color: var(--color-banner-felicitaciones);
+    color: var(--color-texto-banner);
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.felicitaciones-banner.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#malla-curricular {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.semestre {
+    flex: 1;
+    min-width: 190px;
+    background-color: var(--color-semestre);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 4px 12px var(--color-sombra);
+    transition: all 0.3s ease;
+}
+
+.semestre h2 {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--color-titulo-semestre);
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.ramo {
+    background-color: transparent;
+    color: var(--color-titulo-semestre);
+    padding: 12px 8px;
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.ramo:not(.bloqueado):not(.aprobado):hover {
+    background-color: #fdf6f8;
+    color: var(--color-titulo-principal);
+}
+
+.ramo.aprobado {
+    background-color: var(--color-titulo-principal);
+    color: var(--color-texto-aprobado);
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.ramo.aprobado:hover {
+    background-color: var(--color-titulo-principal-hover);
+}
+
+.ramo.bloqueado {
+    color: #bbb;
+    cursor: not-allowed;
+    background-color: transparent !important;
+    opacity: 0.7;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-contenido {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 25px;
+    border: 1px solid var(--color-borde);
+    width: 80%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.cerrar-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#lista-requisitos li {
+    background-color: var(--color-fondo);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-titulo-principal);
+    list-style-type: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    #malla-curricular {
+        flex-direction: column;
+    }
+}
