@@ -1,3 +1,4 @@
+/* -- VARIABLES DE COLOR (Sin cambios) -- */
 :root {
     --color-fondo: #fdeff2;
     --color-semestre: #ffffff;
@@ -12,6 +13,7 @@
     --fuente-principal: 'Poppins', sans-serif;
 }
 
+/* -- ESTILOS GENERALES (Sin cambios) -- */
 body {
     font-family: var(--fuente-principal);
     background-color: var(--color-fondo);
@@ -30,6 +32,7 @@ header h1 {
     font-size: 2em;
 }
 
+/* -- BANNER DE FELICITACIONES (Sin cambios) -- */
 .felicitaciones-banner {
     background-color: var(--color-banner-felicitaciones);
     color: var(--color-texto-banner);
@@ -49,14 +52,22 @@ header h1 {
     transform: translateY(0);
 }
 
+/* * ---------------------------------------------------
+ * -- CAMBIO PRINCIPAL EN LA ESTRUCTURA DE LA MALLA --
+ * ---------------------------------------------------
+ * Aquí es donde ocurre la magia. Cambiamos de flex a grid
+ * para ordenar los semestres en filas de 3.
+*/
 #malla-curricular {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-    overflow-x: auto;
+    display: grid; /* <-- CAMBIADO: Antes era 'flex' */
+    grid-template-columns: repeat(3, 1fr); /* <-- AÑADIDO: Crea 3 columnas de igual tamaño */
+    gap: 25px; /* Un poco más de espacio entre las columnas */
     padding: 10px;
+    max-width: 1200px; /* Ancho máximo para que no se estire demasiado en pantallas grandes */
+    margin: 0 auto; /* Centra la malla en la página */
 }
+/* -- FIN DEL CAMBIO PRINCIPAL -- */
+
 
 .semestre {
     flex: 1;
@@ -166,12 +177,28 @@ header h1 {
     list-style-type: none;
 }
 
-@media (max-width: 768px) {
+
+/* * ----------------------------------------
+ * -- AJUSTES AL DISEÑO RESPONSIVO --
+ * ----------------------------------------
+ * Ahora que usamos Grid, ajustamos cómo se ve
+ * en tablets y celulares.
+*/
+
+/* Para tablets (2 columnas) */
+@media (max-width: 992px) {
+    #malla-curricular {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Para celulares (1 columna) */
+@media (max-width: 600px) {
     body {
         padding: 10px;
     }
 
     #malla-curricular {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 }
